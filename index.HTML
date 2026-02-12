@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    
+    <!-- Animasi garis gelombang neon di atas header -->
+    <style>
+        #header-neon-wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 60px;
+            z-index: 2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        @media (max-width: 600px) {
+            #header-neon-wave { height: 36px; }
+        }
+    </style>
+    <div id="header-neon-wave">
+        <canvas id="header-neon-canvas" style="width:100%;height:100%;display:block;"></canvas>
+    </div>
+    <script>
+        // Neon wave animasi di atas header
+        const headerNeon = document.getElementById('header-neon-canvas');
+        function resizeHeaderNeon() {
+            headerNeon.width = headerNeon.offsetWidth;
+            headerNeon.height = headerNeon.offsetHeight;
+        }
+        window.addEventListener('resize', resizeHeaderNeon);
+        setTimeout(resizeHeaderNeon, 1);
+        resizeHeaderNeon();
+        const ctxHeaderNeon = headerNeon.getContext('2d');
+        let tHeader = 0;
+        function drawHeaderNeon() {
+            resizeHeaderNeon();
+            const w = headerNeon.width, h = headerNeon.height;
+            ctxHeaderNeon.clearRect(0, 0, w, h);
+            ctxHeaderNeon.save();
+            ctxHeaderNeon.shadowColor = '#4f8cff';
+            ctxHeaderNeon.shadowBlur = 16;
+            ctxHeaderNeon.lineWidth = 3;
+            ctxHeaderNeon.beginPath();
+            for (let x = 0; x <= w; x += 2) {
+                const y = h/2 + Math.sin((x/60) + tHeader) * 14 + Math.cos((x/30) - tHeader*1.5) * 5;
+                ctxHeaderNeon.lineTo(x, y);
+            }
+            ctxHeaderNeon.strokeStyle = 'rgba(79,140,255,0.93)';
+            ctxHeaderNeon.stroke();
+            // Accent
+            ctxHeaderNeon.shadowColor = '#eebbc3';
+            ctxHeaderNeon.shadowBlur = 7;
+            ctxHeaderNeon.lineWidth = 1.1;
+            ctxHeaderNeon.beginPath();
+            for (let x = 0; x <= w; x += 2) {
+                const y = h/2 + Math.sin((x/60) + tHeader) * 10 + Math.cos((x/40) + tHeader*2) * 4;
+                ctxHeaderNeon.lineTo(x, y);
+            }
+            ctxHeaderNeon.strokeStyle = 'rgba(238,187,195,0.7)';
+            ctxHeaderNeon.stroke();
+            ctxHeaderNeon.restore();
+            tHeader += 0.022;
+            requestAnimationFrame(drawHeaderNeon);
+        }
+        drawHeaderNeon();
+    </script>
+    <!-- Tidak perlu kode tambahan di sini untuk mengubah background.
+        Untuk membuat background website lebih gelap dan modern, ubah variabel CSS di bawah ini: -->
+    <style>
+        :root {
+            --primary: #4f8cff;
+            --secondary: #f4f6fb;
+            --accent: #eebbc3;
+            --bg: #232946;
+            --white: #232946;
+        }
+
+        body {
+            background: var(--bg);
+            color: #fff;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DAVID EDI SAPUTRA</title>
+    <!-- Favicon & manifest -->
+    <link rel="icon" type="image/png" href="David Edi Saputra.jpeg">
+    <meta name="theme-color" content="#4f8cff">
+    <meta name="description"
+        content="David Edi Saputra, Mahasiswa Informatika Universitas Gunadarma.">
+    <meta name="keywords"
+        content="David Edi Saputra, Informatika, Gunadarma, Web Developer, Portfolio, Teknologi, Pemrograman">
+    <meta name="author" content="DAVID EDI SAPUTRA">
+    <!-- Open Graph for social preview -->
+    <meta property="og:title" content="David Edi Saputra | Mahasiawa Informatika Universitas Gunadarma">
+    <meta property="og:description" content="Portofolio, Web Developer, Teknologi, Pemrograman.">
+    <meta property="og:image" content="David Edi Saputra.jpeg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/">
+    <!-- Animasi smooth scroll -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f8cff;
+            --secondary: #232946;
+            --accent: #eebbc3;
+            --bg: #f4f6fb;
+            --white: #fff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--secondary);
+        }
+
+        header {
+            background: linear-gradient(90deg, var(--primary) 60%, var(--accent) 100%);
+            color: var(--white);
+            padding: 60px 0 40px 0;
+            text-align: center;
+            box-shadow: 0 4px 24px rgba(79, 140, 255, 0.08);
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            margin: 0 0 10px 0;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: var(--white);
+            border-radius: 18px;
+            box-shadow: 0 2px 16px rgba(35, 41, 70, 0.07);
+            padding: 36px 28px;
+        }
+
+        .profile-img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid var(--primary);
+            margin: -90px auto 24px auto;
+            display: block;
+            background: var(--white);
+            box-shadow: 0 2px 12px rgba(79, 140, 255, 0.10);
+        }
+
+        h2 {
+            color: var(--primary);
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 0;
+        }
+
+        .about {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 32px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .info-list li {
+            background: var(--bg);
+            padding: 18px 24px;
+            border-radius: 12px;
+            flex: 1 1 220px;
+            box-shadow: 0 1px 6px rgba(35, 41, 70, 0.04);
+            font-size: 1rem;
+        }
+
+        .social {
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .social a {
+            display: inline-block;
+            margin: 0 12px;
+            color: var(--primary);
+            font-size: 1.7rem;
+            transition: color 0.2s;
+            text-decoration: none;
+        }
+
+        .social a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 18px 6vw;
+            }
+
+            .info-list {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .profile-img {
+                width: 100px;
+                height: 100px;
+                margin-top: -60px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    
+    <img src="/images/foto keluarga.png" alt="Foto Keluarga"
+        style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-1; opacity:0.1;">
+    <header>
+        <!-- Animasi Robot kecil & Tulisan "TEKNOLOGI" berjalan di atas halaman -->
+        <div id="robot-run-container"
+            style="position:fixed;top:18px;left:0;width:100vw;pointer-events:none;z-index:20;">
+            <svg id="robot-run" width="80" height="60" style="position:absolute;left:-80px;top:0;">
+                <!-- Antena -->
+                <rect x="37" y="2" width="6" height="10" rx="2" fill="#4f8cff">
+                    <animate attributeName="y" values="2;0;2" dur="1s" repeatCount="indefinite" />
+                </rect>
+                <circle cx="40" cy="0" r="3" fill="#eebbc3">
+                    <animate attributeName="cy" values="0;-2;0" dur="1s" repeatCount="indefinite" />
+                    <animate attributeName="fill" values="#eebbc3;#4f8cff;#eebbc3" dur="1s" repeatCount="indefinite" />
+                </circle>
+                <!-- Kepala -->
+                <rect x="20" y="10" width="40" height="22" rx="8" fill="#fff" stroke="#4f8cff" stroke-width="2" />
+                <!-- Mata -->
+                <ellipse cx="30" cy="22" rx="3" ry="3" fill="#232946" />
+                <ellipse cx="50" cy="22" rx="3" ry="3" fill="#232946" />
+                <!-- Mulut -->
+                <rect x="34" y="28" width="12" height="3" rx="1.5" fill="#eebbc3" />
+                <!-- Badan -->
+                <rect x="26" y="32" width="28" height="14" rx="6" fill="#4f8cff" stroke="#232946" stroke-width="1.5" />
+                <!-- Lengan kiri -->
+                <rect x="12" y="34" width="10" height="5" rx="2.5" fill="#eebbc3">
+                    <animate attributeName="y" values="34;38;34" dur="0.7s" repeatCount="indefinite" />
+                </rect>
+                <!-- Lengan kanan -->
+                <rect x="58" y="34" width="10" height="5" rx="2.5" fill="#eebbc3">
+                    <animate attributeName="y" values="34;30;34" dur="0.7s" repeatCount="indefinite" />
+                </rect>
+                <!-- Kaki kiri -->
+                <rect x="30" y="46" width="6" height="10" rx="2" fill="#eebbc3">
+                    <animate attributeName="y" values="46;50;46" dur="0.7s" repeatCount="indefinite" />
+                </rect>
+                <!-- Kaki kanan -->
+                <rect x="44" y="46" width="6" height="10" rx="2" fill="#eebbc3">
+                    <animate attributeName="y" values="46;42;46" dur="0.7s" repeatCount="indefinite" />
+                </rect>
+                <!-- Lampu dada -->
+                <circle cx="40" cy="39" r="3" fill="#fff">
+                    <animate attributeName="fill" values="#fff;#eebbc3;#fff" dur="1s" repeatCount="indefinite" />
+                </circle>
+            </svg>
+            <div id="tech-run" style="position:absolute;left:-300px;top:12px;display:flex;align-items:center;">
+                <span style="
+                    font-family:'Montserrat',monospace;
+                    font-size:2rem;
+                    color:#4f8cff;
+                    font-weight:700;
+                    letter-spacing:0.18em;
+                    text-shadow:0 2px 12px rgba(79,140,255,0.13), 0 0 2px #fff;
+                    background: linear-gradient(90deg, #4f8cff 60%, #eebbc3 100%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                    border-right:.12em solid #eebbc3;
+                    padding-left:12px;
+                "></span>
+            </div>
+        </div>
+        <script>
+            (function () {
+                // Robot berjalan di atas
+                const robot = document.getElementById('robot-run');
+                const tech = document.getElementById('tech-run');
+                const techText = tech.querySelector('span');
+                const text = "TEKNOLOGI";
+                let i = 0;
+                function typeAnim() {
+                    if (i <= text.length) {
+                        techText.textContent = text.slice(0, i);
+                        i++;
+                        setTimeout(typeAnim, 90);
+                    } else {
+                        setTimeout(() => glitchAnim(0), 400);
+                    }
+                }
+                function glitchAnim(count) {
+                    if (count > 7) {
+                        techText.textContent = text;
+                        techText.style.textShadow = "0 2px 12px rgba(79,140,255,0.13), 0 0 2px #fff";
+                        return;
+                    }
+                    let glitched = text.split('').map(c => Math.random() < 0.22 ? String.fromCharCode(65 + Math.floor(Math.random() * 26)) : c).join('');
+                    techText.textContent = glitched;
+                    techText.style.textShadow = count % 2 ? "2px 0 #eebbc3, -2px 0 #232946" : "0 2px 12px rgba(79,140,255,0.13), 0 0 2px #fff";
+                    setTimeout(() => glitchAnim(count + 1), 50);
+                }
+                function animateRun() {
+                    let pos = -80, posTech = -300;
+                    const screenW = window.innerWidth;
+                    robot.style.left = pos + 'px';
+                    tech.style.left = posTech + 'px';
+                    robot.style.display = 'block';
+                    tech.style.display = 'flex';
+                    i = 0;
+                    typeAnim();
+                    function step() {
+                        pos += 3.2;
+                        posTech += 3.2;
+                        robot.style.left = pos + 'px';
+                        tech.style.left = posTech + 'px';
+                        if (pos < screenW + 80) {
+                            requestAnimationFrame(step);
+                        } else {
+                            robot.style.display = 'none';
+                            tech.style.display = 'none';
+                            setTimeout(animateRun, 12000 + Math.random() * 3000);
+                        }
+                    }
+                    step();
+                }
+                setTimeout(animateRun, 1200);
+                window.addEventListener('resize', () => {
+                    robot.style.display = 'none';
+                    tech.style.display = 'none';
+                    setTimeout(animateRun, 1000);
+                });
+            })();
+        </script>
+        <style>
+            body {
+                background: #181c2f;
+                color: #fff;
+            }
+
+            header,
+            .container,
+            [style*="max-width: 900px; margin: 48px auto 0 auto"] {
+                background: #232946 !important;
+                color: #fff !important;
+            }
+        </style>
+        <h1>DAVID EDI SAPUTRA</h1>
+        </div>
+        <p style="font-size:1.1rem; margin-top:8px;">Cyber Security Enthusiast | Informatics Engineering Student 
+                                                              | Future SOC Analyst </p>
+        <!-- Animasi Robot Menarik Perhatian -->
+        <div id="robot-anim-container"
+            style="display:flex; justify-content:center; align-items:center; margin-top:24px;">
+            <svg id="robot-anim" width="120" height="120" viewBox="0 0 120 120" style="overflow:visible;">
+                <!-- Antena -->
+                <rect x="57" y="10" width="6" height="18" rx="3" fill="#4f8cff">
+                    <animate attributeName="y" values="10;6;10" dur="1.2s" repeatCount="indefinite" />
+                </rect>
+                <circle cx="60" cy="8" r="5" fill="#eebbc3">
+                    <animate attributeName="cy" values="8;4;8" dur="1.2s" repeatCount="indefinite" />
+                    <animate attributeName="fill" values="#eebbc3;#4f8cff;#eebbc3" dur="1.2s"
+                        repeatCount="indefinite" />
+                </circle>
+                <!-- Kepala -->
+                <rect x="30" y="28" width="60" height="48" rx="18" fill="#fff" stroke="#4f8cff" stroke-width="3" />
+                <!-- Mata kiri -->
+                <ellipse id="eyeL" cx="45" cy="52" rx="7" ry="7" fill="#232946" />
+                <!-- Mata kanan -->
+                <ellipse id="eyeR" cx="75" cy="52" rx="7" ry="7" fill="#232946" />
+                <!-- Highlight mata -->
+                <ellipse cx="47" cy="50" rx="2" ry="2" fill="#fff" opacity="0.7" />
+                <ellipse cx="77" cy="50" rx="2" ry="2" fill="#fff" opacity="0.7" />
+                <!-- Mulut -->
+                <rect id="mouth" x="52" y="66" width="16" height="6" rx="3" fill="#eebbc3">
+                    <animate attributeName="width" values="16;24;16" dur="1.2s" repeatCount="indefinite" />
+                    <animate attributeName="x" values="52;48;52" dur="1.2s" repeatCount="indefinite" />
+                </rect>
+                <!-- Badan -->
+                <rect x="40" y="76" width="40" height="28" rx="12" fill="#4f8cff" stroke="#232946" stroke-width="2" />
+                <!-- Lengan kiri -->
+                <rect id="armL" x="18" y="80" width="16" height="8" rx="4" fill="#eebbc3">
+                    <animate attributeName="y" values="80;70;80" dur="1.2s" repeatCount="indefinite" />
+                </rect>
+                <!-- Lengan kanan -->
+                <rect id="armR" x="86" y="80" width="16" height="8" rx="4" fill="#eebbc3">
+                    <animate attributeName="y" values="80;90;80" dur="1.2s" repeatCount="indefinite" />
+                </rect>
+                <!-- Lampu dada -->
+                <circle id="chest-light" cx="60" cy="90" r="6" fill="#fff">
+                    <animate attributeName="fill" values="#fff;#eebbc3;#fff" dur="1.2s" repeatCount="indefinite" />
+                    <animate attributeName="r" values="6;9;6" dur="1.2s" repeatCount="indefinite" />
+                </circle>
+            </svg>
+        </div>
+        <script>
+            // Animasi mata robot mengikuti mouse
+            const svg = document.getElementById('robot-anim');
+            const eyeL = document.getElementById('eyeL');
+            const eyeR = document.getElementById('eyeR');
+            document.addEventListener('mousemove', e => {
+                const rect = svg.getBoundingClientRect();
+                const mx = e.clientX - rect.left;
+                const my = e.clientY - rect.top;
+                // Batas gerak bola mata
+                function calc(cx, cy) {
+                    const dx = Math.max(-3, Math.min(3, (mx - cx) / 18));
+                    const dy = Math.max(-2, Math.min(2, (my - cy) / 18));
+                    return { dx, dy };
+                }
+                const l = calc(45, 52), r = calc(75, 52);
+                eyeL.setAttribute('cx', 45 + l.dx);
+                eyeL.setAttribute('cy', 52 + l.dy);
+                eyeR.setAttribute('cx', 75 + r.dx);
+                eyeR.setAttribute('cy', 52 + r.dy);
+            });
+        </script>
+
+        <!-- Background Partikel & Gradient sudah otomatis dari CSS dan <canvas> -->
+        <!-- Jika ingin menambah efek background pada header: -->
+        <style>
+            header {
+                position: relative;
+                overflow: hidden;
+            }
+
+            /* Efek gradient lembut di header */
+            header::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                z-index: 0;
+                background: radial-gradient(circle at 70% 30%, #eebbc3 0%, transparent 60%),
+                    radial-gradient(circle at 20% 80%, #4f8cff 0%, transparent 70%);
+                opacity: 0.22;
+                pointer-events: none;
+            }
+
+            /* Agar konten header tetap di atas background */
+            header>* {
+                position: relative;
+                z-index: 1;
+            }
+        </style>
+    </header>
+
+    <div style="margin-top:32px;"></div>
+
+    </div>
+
+    </div>
+    </div>
+
+
+    <!-- Section mirip dengan contoh: Hero dengan nama, headline, dan social media -->
+    <div
+        style="max-width: 900px; margin: 48px auto 0 auto; background: var(--white); border-radius: 18px; box-shadow: 0 2px 16px rgba(35,41,70,0.07); padding: 36px 28px; display: flex; align-items: center; gap: 36px; flex-wrap: wrap;">
+        <div style="flex:1; min-width:260px;">
+            <p style="font-weight:600; color:(--secondary); margin:0 0 10px 0;">HALO, SAYA</p>
+            <h1 style="font-family:'Montserrat',sans-serif; font-size:2.4rem; margin:0 0 12px 0; letter-spacing:2px;">
+                <span style="color:var(--primary);">DAVID EDI
+                    SAPUTRA.</span> 
+            </h1>
+            <p style="font-size:1.1rem; margin:0 0 18px 0;">
+Mahasiswa Informatika Universitas Gunadarma dengan minat pada Web Development, 
+Teknologi, dan Pemrograman. Berfokus pada pengembangan kemampuan teknis, problem solving, 
+serta eksplorasi teknologi modern untuk mempersiapkan diri menjadi profesional di industri teknologi.
+
+            </p>
+            <a href="CV_David Edi Saputra_51425384.pdf" class="btn-cv" target="_blank" style="margin-top:18px;"><i
+                    class="fa-solid fa-download"></i> Download CV</a>
+            <div class="social" style="margin-top:18px;">
+                <a href="https://github.com/" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/david-edi-saputra-53a036332/
+" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="davidedisaputra247@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://www.instagram.com/david_edi_saputraa" target="_blank" title="Instagram" class="instagram-gradient"><i
+                        class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div style="flex:1; min-width:220px; display:flex; justify-content:center;">
+            <img src="David Edi Saputra.jpeg" alt="Foto Profil"
+                style="width:180px; height:180px; border-radius:50%; object-fit:cover; border:6px solid var(--primary); background:var(--white); box-shadow:0 2px 16px rgba(79,140,255,0.13);">
+        </div>
+    </div>
+    <!-- Section: Keterampilan Horizontal -->
+    <div class="container" style="margin-top:48px;">
+        <h2 style="text-align:center; color:var(--primary); margin-bottom:28px;">Keterampilan</h2>
+        <div class="skills-row" style="display:flex; justify-content:center; gap:36px; flex-wrap:wrap;">
+            <div class="skill-card">
+                <i class="fa-brands fa-html5" style="font-size:2.5rem; color:#e44d26;"></i>
+                <div class="skill-label">HTML</div>
+            </div>
+            <div class="skill-card">
+                <i class="fa-brands fa-css3-alt" style="font-size:2.5rem; color:#1572b6;"></i>
+                <div class="skill-label">CSS</div>
+            </div>
+            <div class="skill-card">
+                <i class="fa-brands fa-js-square" style="font-size:2.5rem; color:#f7df1e;"></i>
+                <div class="skill-label">JavaScript</div>
+            </div>
+            <div class="skill-card">
+                <i class="fa-brands fa-python" style="font-size:2.5rem; color:#3776ab;"></i>
+                <div class="skill-label">Python</div>
+            </div>
+            <div class="skill-card">
+                <i class="fa-brands fa-github" style="font-size:2.5rem; color:#232946;"></i>
+                <div class="skill-label">Git &amp; GitHub</div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .skills-row {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        .skill-card {
+            background: var(--bg);
+            border-radius: 14px;
+            box-shadow: 0 2px 10px rgba(35,41,70,0.07);
+            padding: 32px 36px 24px 36px;
+            min-width: 140px;
+            text-align: center;
+            transition: transform 0.18s, box-shadow 0.18s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .skill-card:hover {
+            transform: translateY(-8px) scale(1.04);
+            box-shadow: 0 6px 24px rgba(79,140,255,0.13);
+            background: linear-gradient(120deg, var(--bg) 80%, #eebbc3 100%);
+        }
+        .skill-label {
+            font-weight: 700;
+            margin-top: 16px;
+            color: var(--primary);
+            font-size: 1.08rem;
+            letter-spacing: 1px;
+            font-family: 'Montserrat',sans-serif;
+        }
+        @media (max-width: 700px) {
+            .skills-row {
+                flex-wrap: wrap;
+                gap: 18px;
+            }
+            .skill-card {
+                min-width: 110px;
+                padding: 22px 12px 16px 12px;
+            }
+            .skill-label {
+                font-size: 0.98rem;
+                margin-top: 10px;
+            }
+        }
+    </style>
+    <!-- Animasi tambahan: Garis neon bergerak membentuk pola gelombang di bawah section keterampilan -->
+    <div id="neon-wave" style="width:100%; height:60px; margin:36px 0 0 0; position:relative; overflow:hidden;">
+        <canvas id="neon-wave-canvas" style="width:100%; height:100%; display:block;"></canvas>
+    </div>
+    <script>
+    const neonCanvas = document.getElementById('neon-wave-canvas');
+    function resizeNeon() {
+            neonCanvas.width = neonCanvas.offsetWidth;
+            neonCanvas.height = neonCanvas.offsetHeight;
+    }
+    resizeNeon();
+    window.addEventListener('resize', resizeNeon);
+
+    const ctxNeon = neonCanvas.getContext('2d');
+    let t = 0;
+    function drawNeonWave() {
+            resizeNeon();
+            const w = neonCanvas.width, h = neonCanvas.height;
+            ctxNeon.clearRect(0, 0, w, h);
+            ctxNeon.save();
+            ctxNeon.shadowColor = '#4f8cff';
+            ctxNeon.shadowBlur = 18;
+            ctxNeon.lineWidth = 3.5;
+            ctxNeon.beginPath();
+            for (let x = 0; x <= w; x += 2) {
+                    const y = h/2 + Math.sin((x/60) + t) * 18 + Math.sin((x/30) - t*1.5) * 6;
+                    ctxNeon.lineTo(x, y);
+            }
+            ctxNeon.strokeStyle = 'rgba(79,140,255,0.93)';
+            ctxNeon.stroke();
+            // Neon accent
+            ctxNeon.shadowColor = '#eebbc3';
+            ctxNeon.shadowBlur = 8;
+            ctxNeon.lineWidth = 1.2;
+            ctxNeon.beginPath();
+            for (let x = 0; x <= w; x += 2) {
+                    const y = h/2 + Math.sin((x/60) + t) * 18 + Math.cos((x/40) + t*2) * 5;
+                    ctxNeon.lineTo(x, y);
+            }
+            ctxNeon.strokeStyle = 'rgba(238,187,195,0.7)';
+            ctxNeon.stroke();
+            ctxNeon.restore();
+            t += 0.025;
+            requestAnimationFrame(drawNeonWave);
+    }
+    drawNeonWave();
+    </script>
+    <!-- Section: Proyek -->
+    <div class="container" style="margin-top:48px;">
+        <h2 style="text-align:center; color:var(--primary); margin-bottom:28px;">Proyek Pilihan</h2>
+        <div style="display:flex; flex-wrap:wrap; gap:28px; justify-content:center;">
+            <div
+                style="background:var(--bg); border-radius:12px; box-shadow:0 1px 6px rgba(35,41,70,0.04); padding:24px 24px; min-width:260px; max-width:320px;">
+                <h3 style="margin-top:0; color:var(--secondary);">Website Portfolio</h3>
+                <p style="font-size:1rem; color:#444;">Website personal untuk menampilkan profil, keterampilan, dan
+                    kontak. Dibuat dengan HTML, CSS, dan JavaScript.</p>
+                <a href="#" target="_blank" class="btn-cv" style="margin-top:10px;"><i
+                        class="fa-solid fa-arrow-up-right-from-square"></i> Lihat Demo</a>
+                <a href="#" target="_blank" class="btn-cv"
+                    style="margin-top:10px; background:var(--accent); color:var(--secondary);"><i
+                        class="fa-brands fa-github"></i> Source Code</a>
+
+            </div>
+            <div
+                style="background:var(--bg); border-radius:12px; box-shadow:0 1px 6px rgba(35,41,70,0.04); padding:24px 24px; min-width:260px; max-width:320px;">
+                <h3 style="margin-top:0; color:var(--secondary);">Aplikasi To-Do List</h3>
+                <p style="font-size:1rem; color:#444;">Aplikasi sederhana untuk mencatat tugas harian berbasis web,
+                    menggunakan JavaScript dan localStorage.</p>
+                <!-- To-Do List App -->
+                <div id="todo-app" style="margin-top:18px;">
+                    <form id="todo-form" style="display:flex; gap:8px; margin-bottom:16px;">
+                        <input type="text" id="todo-input" placeholder="Tambah tugas baru..." required
+                            style="flex:1; padding:10px; border-radius:6px; border:1px solid #dbeafe; font-size:1rem;">
+                        <button type="submit" class="btn-cv" style="padding:10px 18px; font-size:1rem;">Tambah</button>
+                    </form>
+                    <ul id="todo-list"
+                        style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+                    </ul>
+                </div>
+                <script>
+                    // To-Do List logic
+                    const todoInput = document.getElementById('todo-input');
+                    const todoForm = document.getElementById('todo-form');
+                    const todoList = document.getElementById('todo-list');
+                    const STORAGE_KEY = 'davidedi_todos';
+
+                    function getTodos() {
+                        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+                    }
+                    function saveTodos(todos) {
+                        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+                    }
+                    function renderTodos() {
+                        const todos = getTodos();
+                        todoList.innerHTML = '';
+                        if (todos.length === 0) {
+                            todoList.innerHTML = '<li style="color:#888; text-align:center;">Belum ada tugas.</li>';
+                            return;
+                        }
+                        todos.forEach((todo, idx) => {
+                            const li = document.createElement('li');
+                            li.style.cssText = 'background:var(--white); border-radius:7px; box-shadow:0 1px 4px rgba(35,41,70,0.04); padding:10px 14px; display:flex; align-items:center; justify-content:space-between;';
+                            li.innerHTML = `
+                                <span style="flex:1;${todo.done ? 'text-decoration:line-through;color:#aaa;' : ''}">${todo.text}</span>
+                                <div style="display:flex; gap:8px;">
+                                    <button title="Selesai" style="background:var(--primary);color:var(--white);border:none;border-radius:5px;padding:4px 10px;cursor:pointer;font-size:1rem;" onclick="toggleTodo(${idx})"><i class="fa-solid fa-check"></i></button>
+                                    <button title="Hapus" style="background:var(--accent);color:var(--secondary);border:none;border-radius:5px;padding:4px 10px;cursor:pointer;font-size:1rem;" onclick="deleteTodo(${idx})"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            `;
+                            todoList.appendChild(li);
+                        });
+                    }
+                    function addTodo(text) {
+                        const todos = getTodos();
+                        todos.push({ text, done: false });
+                        saveTodos(todos);
+                        renderTodos();
+                    }
+                    function toggleTodo(idx) {
+                        const todos = getTodos();
+                        todos[idx].done = !todos[idx].done;
+                        saveTodos(todos);
+                        renderTodos();
+                    }
+                    function deleteTodo(idx) {
+                        const todos = getTodos();
+                        todos.splice(idx, 1);
+                        saveTodos(todos);
+                        renderTodos();
+                    }
+                    window.toggleTodo = toggleTodo;
+                    window.deleteTodo = deleteTodo;
+
+                    todoForm.onsubmit = function (e) {
+                        e.preventDefault();
+                        const val = todoInput.value.trim();
+                        if (val) {
+                            addTodo(val);
+                            todoInput.value = '';
+                        }
+                    };
+                    renderTodos();
+                </script>
+
+            </div>
+            <div
+                style="background:var(--bg); border-radius:12px; box-shadow:0 1px 6px rgba(35,41,70,0.04); padding:24px 24px; min-width:260px; max-width:320px;">
+                <h3 style="margin-top:0; color:var(--secondary);">Kalkulator Sederhana</h3>
+                <p style="font-size:1rem; color:#444;">Kalkulator web interaktif dengan tampilan modern, dibuat
+                    menggunakan HTML, CSS, dan JavaScript.</p>
+
+
+                <!-- Footer Section -->
+                <!-- Kalkulator Web Interaktif -->
+                <div class="container" style="margin-top:48px; max-width:400px;">
+                    <h2 style="text-align:center; color:var(--primary); margin-bottom:24px;">Kalkulator</h2>
+                    <div id="calculator"
+                        style="background:var(--bg); border-radius:14px; box-shadow:0 1px 8px rgba(35,41,70,0.06); padding:24px;">
+                    </div>
+                    <input type="text" id="calc-display" value="0" readonly
+                        style="width:100%; font-size:2rem; text-align:right; padding:16px 12px; border-radius:8px; border:1px solid #dbeafe; margin-bottom:18px; background:var(--white); color:var(--secondary); font-family:'Roboto',monospace;">
+                    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px;">
+                        <button class="calc-btn" data-value="7">7</button>
+                        <button class="calc-btn" data-value="8">8</button>
+                        <button class="calc-btn" data-value="9">9</button>
+                        <button class="calc-btn op" data-value="/">÷</button>
+                        <button class="calc-btn" data-value="4">4</button>
+                        <button class="calc-btn" data-value="5">5</button>
+                        <button class="calc-btn" data-value="6">6</button>
+                        <button class="calc-btn op" data-value="*">×</button>
+                        <button class="calc-btn" data-value="1">1</button>
+                        <button class="calc-btn" data-value="2">2</button>
+                        <button class="calc-btn" data-value="3">3</button>
+                        <button class="calc-btn op" data-value="-">−</button>
+                        <button class="calc-btn" data-value="0">0</button>
+                        <button class="calc-btn" data-value=".">.</button>
+                        <button class="calc-btn" id="calc-clear">C</button>
+                        <button class="calc-btn op" data-value="+">+</button>
+                        <button class="calc-btn" id="calc-del" style="grid-column:span 2;">⌫</button>
+                        <button class="calc-btn" id="calc-equal"
+                            style="grid-column:span 2; background:var(--primary); color:var(--white);">=</button>
+                    </div>
+                </div>
+            </div>
+            <style>
+                #calculator .calc-btn {
+                    padding: 16px 0;
+                    font-size: 1.2rem;
+                    border: none;
+                    border-radius: 7px;
+                    background: var(--white);
+                    color: var(--secondary);
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: background 0.18s, color 0.18s;
+                    box-shadow: 0 1px 4px rgba(35, 41, 70, 0.04);
+                }
+
+                #calculator .calc-btn:hover,
+                #calculator .calc-btn:focus {
+                    background: var(--primary);
+                    color: var(--white);
+                    outline: none;
+                }
+
+                #calculator .calc-btn.op {
+                    background: var(--accent);
+                    color: var(--secondary);
+                }
+
+                #calculator .calc-btn.op:hover {
+                    background: var(--primary);
+                    color: var(--white);
+                }
+
+                @media (max-width: 600px) {
+                    #calculator {
+                        padding: 12px;
+                    }
+
+                    #calculator input {
+                        font-size: 1.3rem;
+                        padding: 10px 6px;
+                    }
+                }
+            </style>
+            <script>
+                // Kalkulator logic
+                const display = document.getElementById('calc-display');
+                let current = '0';
+                let operator = '';
+                let operand = '';
+                let resetNext = false;
+
+                function updateDisplay() {
+                    display.value = current;
+                }
+
+                function appendNumber(num) {
+                    if (resetNext) {
+                        current = num === '.' ? '0.' : num;
+                        resetNext = false;
+                    } else if (num === '.') {
+                        if (!current.includes('.')) current += '.';
+                    } else {
+                        current = current === '0' ? num : current + num;
+                    }
+                    updateDisplay();
+                }
+
+                function setOperator(op) {
+                    if (operator && !resetNext) calculate();
+                    operand = current;
+                    operator = op;
+                    resetNext = true;
+                }
+
+                function calculate() {
+                    let result = 0;
+                    const a = parseFloat(operand);
+                    const b = parseFloat(current);
+                    if (operator === '+') result = a + b;
+                    else if (operator === '-') result = a - b;
+                    else if (operator === '*') result = a * b;
+                    else if (operator === '/') result = b !== 0 ? a / b : 'Error';
+                    else result = b;
+                    current = (result === 'Error') ? 'Error' : result.toString();
+                    operator = '';
+                    operand = '';
+                    resetNext = true;
+                    updateDisplay();
+                }
+
+                function clearCalc() {
+                    current = '0';
+                    operator = '';
+                    operand = '';
+                    resetNext = false;
+                    updateDisplay();
+                }
+
+                function delLast() {
+                    if (resetNext || current === 'Error') {
+                        clearCalc();
+                        return;
+                    }
+                    current = current.length > 1 ? current.slice(0, -1) : '0';
+                    updateDisplay();
+                }
+
+                document.querySelectorAll('#calculator .calc-btn').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const val = this.getAttribute('data-value');
+                        if (val >= '0' && val <= '9' || val === '.') {
+                            appendNumber(val);
+                        } else if (['+', '-', '*', '/'].includes(val)) {
+                            setOperator(val);
+                        }
+                    });
+                });
+                document.getElementById('calc-equal').onclick = calculate;
+                document.getElementById('calc-clear').onclick = clearCalc;
+                document.getElementById('calc-del').onclick = delLast;
+            </script>
+        </div>
+    </div>
+    </div>
+
+    <!-- Section: Kontak -->
+    <div class="container" style="margin-top:48px; margin-bottom:48px;">
+        <h2 style="text-align:center; color:var(--primary); margin-bottom:24px;">Hubungi Saya</h2>
+        <form style="max-width:420px; margin:0 auto; display:flex; flex-direction:column; gap:18px;">
+            <input type="text" placeholder="Nama" required
+                style="padding:12px; border-radius:7px; border:1px solid #dbeafe; font-size:1rem;">
+            <input type="email" placeholder="Email" required
+                style="padding:12px; border-radius:7px; border:1px solid #dbeafe; font-size:1rem;">
+            <textarea placeholder="Pesan" rows="4" required
+                style="padding:12px; border-radius:7px; border:1px solid #dbeafe; font-size:1rem; resize:vertical;"></textarea>
+            <button type="submit" class="btn-cv" style="width:100%; margin-top:6px;"><i
+                    class="fa-solid fa-paper-plane"></i> Kirim Pesan</button>
+        </form>
+    </div>
+
+    <!-- Efek animasi scroll dan tombol kembali ke atas -->
+    <style>
+        .btn-cv {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(79, 140, 255, 0.10);
+            transition: background 0.2s, color 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-cv:hover {
+            background: var(--accent);
+            color: var(--secondary);
+        }
+
+        /* Tombol kembali ke atas */
+        #backToTop {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            font-size: 1.6rem;
+            box-shadow: 0 2px 12px rgba(79, 140, 255, 0.15);
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            transition: background 0.2s;
+        }
+
+        #backToTop:hover {
+            background: var(--accent);
+            color: var(--secondary);
+        }
+
+        /* Animasi fade-in */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(.4, 0, .2, 1), transform 0.8s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Instagram gradient icon */
+        .instagram-gradient i {
+            background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+    <button id="backToTop" title="Kembali ke atas"><i class="fa-solid fa-arrow-up"></i></button>
+    <script>
+        // Tombol kembali ke atas
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Efek animasi fade-in saat scroll
+        function revealOnScroll() {
+            document.querySelectorAll('.container, [style*="max-width: 900px; margin: 48px auto 0 auto"]').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 60) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+        document.querySelectorAll('.container, [style*="max-width: 900px; margin: 48px auto 0 auto"]').forEach(el => {
+            el.classList.add('fade-in');
+        });
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('DOMContentLoaded', revealOnScroll);
+    </script>
+
+    <!-- Kalkulator Web Interaktif sudah terpasang di bawah, tidak perlu menambah kode lagi di sini -->
+
+
+    <footer
+        style="background: linear-gradient(90deg, var(--primary) 60%, var(--accent) 100%); color: var(--white); text-align: center; padding: 32px 0 18px 0; margin-top: 48px; border-radius: 18px 18px 0 0; box-shadow: 0 -2px 16px rgba(79,140,255,0.07);">
+        <div style="font-size:1.15rem; font-weight:500; letter-spacing:1px;">
+            Terima kasih telah mengunjungi portofolio saya!
+        </div>
+        <div style="margin-top:10px; font-size:0.98rem;">
+            &copy; 2024 David Edi Saputra &middot; Informatika UG
+        </div>
+        <div style="margin-top:14px;">
+            <a href="https://github.com/" target="_blank" title="GitHub"
+                style="color:var(--white); margin:0 10px; font-size:1.4rem;"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank" title="LinkedIn"
+                style="color:var(--white); margin:0 10px; font-size:1.4rem;"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:david.edi@email.com" title="Email"
+                style="color:var(--white); margin:0 10px; font-size:1.4rem;"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" title="Instagram"
+                style="margin:0 10px; font-size:1.4rem;" class="instagram-gradient"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <!-- Animasi "TEKNOLOGI" dengan efek typing dan glitch -->
+    <div id="tech-anim-container"
+        style="width:100%; display:flex; justify-content:center; align-items:center; margin:48px 0 0 0; z-index:2; position:relative;">
+        <h1 id="tech-anim" style="
+            font-family:'Montserrat',monospace;
+            font-size:2.8rem;
+            color:var(--primary);
+            letter-spacing:0.18em;
+            text-shadow:0 2px 12px rgba(79,140,255,0.13), 0 0 2px #fff;
+            position:relative;
+            overflow:hidden;
+            white-space:nowrap;
+            border-right: .15em solid var(--accent);
+            background: linear-gradient(90deg, var(--primary) 60%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        "></h1>
+    </div>
+    <script>
+        const text = "TEKNOLOGI";
+        const el = document.getElementById('tech-anim');
+        let i = 0;
+        function typeAnim() {
+            if (i <= text.length) {
+                el.textContent = text.slice(0, i);
+                i++;
+                setTimeout(typeAnim, 120);
+            } else {
+                setTimeout(() => glitchAnim(0), 600);
+            }
+        }
+        function glitchAnim(count) {
+            if (count > 8) {
+                el.textContent = text;
+                el.style.textShadow = "0 2px 12px rgba(79,140,255,0.13), 0 0 2px #fff";
+                return;
+            }
+            // Glitch effect: randomize some letters
+            let glitched = text.split('').map((c, idx) => {
+                if (Math.random() < 0.25) {
+                    return String.fromCharCode(65 + Math.floor(Math.random() * 26));
+                }
+                return c;
+            }).join('');
+            el.textContent = glitched;
+            el.style.textShadow = count % 2 ? "2px 0 #eebbc3, -2px 0 #232946" : "0 2px 12px rgba(79,140,255,0.13), 0 0 2px #fff";
+            setTimeout(() => glitchAnim(count + 1), 60);
+        }
+        typeAnim();
+    </script>
+    <!-- Animasi Partikel Indah -->
+    <canvas id="particle-canvas"
+        style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:0;"></canvas>
+    <script>
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const colors = ['#4f8cff', '#eebbc3', '#232946', '#f4f6fb', '#fff', '#1572b6', '#fd5949', '#f7df1e'];
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function randomBetween(a, b) {
+            return a + Math.random() * (b - a);
+        }
+        function createParticle() {
+            const size = randomBetween(2, 6);
+            return {
+                x: randomBetween(0, canvas.width),
+                y: randomBetween(0, canvas.height),
+                vx: randomBetween(-0.6, 0.6),
+                vy: randomBetween(-0.6, 0.6),
+                size,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                alpha: randomBetween(0.5, 1),
+                phase: Math.random() * Math.PI * 2
+            };
+        }
+        function initParticles(num = 70) {
+            particles = [];
+            for (let i = 0; i < num; i++) {
+                particles.push(createParticle());
+            }
+        }
+        initParticles();
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Draw lines between close particles
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 110) {
+                        ctx.save();
+                        ctx.globalAlpha = 0.12;
+                        ctx.strokeStyle = particles[i].color;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                        ctx.restore();
+                    }
+                }
+            }
+            // Draw particles
+            for (const p of particles) {
+                ctx.save();
+                ctx.globalAlpha = p.alpha * (0.7 + 0.3 * Math.sin(Date.now() / 700 + p.phase));
+                const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 2);
+                grad.addColorStop(0, p.color);
+                grad.addColorStop(1, 'rgba(255,255,255,0)');
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+        function updateParticles() {
+            for (const p of particles) {
+                p.x += p.vx;
+                p.y += p.vy;
+                // Bounce on edge
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+            }
+        }
+        function animate() {
+            updateParticles();
+            drawParticles();
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+
+    <!-- Animasi tambahan: Robot kecil berjalan di bawah halaman -->
+    <div id="robot-walk-container"
+        style="position:fixed;bottom:18px;left:0;width:100vw;pointer-events:none;z-index:10;">
+        <svg id="robot-walk" width="80" height="60" style="position:absolute;left:-80px;bottom:0;">
+            <!-- Antena -->
+            <rect x="37" y="2" width="6" height="10" rx="2" fill="#4f8cff">
+                <animate attributeName="y" values="2;0;2" dur="1s" repeatCount="indefinite" />
+            </rect>
+            <circle cx="40" cy="0" r="3" fill="#eebbc3">
+                <animate attributeName="cy" values="0;-2;0" dur="1s" repeatCount="indefinite" />
+                <animate attributeName="fill" values="#eebbc3;#4f8cff;#eebbc3" dur="1s" repeatCount="indefinite" />
+            </circle>
+            <!-- Kepala -->
+            <rect x="20" y="10" width="40" height="22" rx="8" fill="#fff" stroke="#4f8cff" stroke-width="2" />
+            <!-- Mata -->
+            <ellipse cx="30" cy="22" rx="3" ry="3" fill="#232946" />
+            <ellipse cx="50" cy="22" rx="3" ry="3" fill="#232946" />
+            <!-- Mulut -->
+            <rect x="34" y="28" width="12" height="3" rx="1.5" fill="#eebbc3" />
+            <!-- Badan -->
+            <rect x="26" y="32" width="28" height="14" rx="6" fill="#4f8cff" stroke="#232946" stroke-width="1.5" />
+            <!-- Lengan kiri -->
+            <rect id="walk-armL" x="12" y="34" width="10" height="5" rx="2.5" fill="#eebbc3">
+                <animate attributeName="y" values="34;38;34" dur="0.7s" repeatCount="indefinite" />
+            </rect>
+            <!-- Lengan kanan -->
+            <rect id="walk-armR" x="58" y="34" width="10" height="5" rx="2.5" fill="#eebbc3">
+                <animate attributeName="y" values="34;30;34" dur="0.7s" repeatCount="indefinite" />
+            </rect>
+            <!-- Kaki kiri -->
+            <rect id="walk-legL" x="30" y="46" width="6" height="10" rx="2" fill="#eebbc3">
+                <animate attributeName="y" values="46;50;46" dur="0.7s" repeatCount="indefinite" />
+            </rect>
+            <!-- Kaki kanan -->
+            <rect id="walk-legR" x="44" y="46" width="6" height="10" rx="2" fill="#eebbc3">
+                <animate attributeName="y" values="46;42;46" dur="0.7s" repeatCount="indefinite" />
+            </rect>
+            <!-- Lampu dada -->
+            <circle cx="40" cy="39" r="3" fill="#fff">
+                <animate attributeName="fill" values="#fff;#eebbc3;#fff" dur="1s" repeatCount="indefinite" />
+            </circle>
+        </svg>
+    </div>
+    <script>
+        // Robot berjalan dari kiri ke kanan, lalu menghilang
+        function animateRobotWalk() {
+            const robot = document.getElementById('robot-walk');
+            let pos = -80;
+            const screenW = window.innerWidth;
+            robot.style.left = pos + 'px';
+            robot.style.display = 'block';
+            function step() {
+                pos += 2.2;
+                robot.style.left = pos + 'px';
+                if (pos < screenW + 80) {
+                    requestAnimationFrame(step);
+                } else {
+                    robot.style.display = 'none';
+                    setTimeout(animateRobotWalk, 9000 + Math.random() * 3000);
+                }
+            }
+            step();
+        }
+        setTimeout(animateRobotWalk, 2000);
+        window.addEventListener('resize', () => {
+            // Reset robot if window resized
+            document.getElementById('robot-walk').style.display = 'none';
+            setTimeout(animateRobotWalk, 1200);
+        });
+    </script>
+
+    <!-- Animasi "TEKNOLOGI" tambahan dengan efek typing dan glitch di tengah halaman (sudah ada di atas, ini contoh lain jika ingin di tempat berbeda) -->
+    <!--
+    <div style="width:100%; display:flex; justify-content:center; align-items:center; margin:32px 0;">
+        <h1 id="tech-anim2" style="
+            font-family:'Montserrat',monospace;
+            font-size:2.2rem;
+            color:var(--primary);
+            letter-spacing:0.18em;
+            text-shadow:0 2px 12px rgba(79,140,255,0.13), 0 0 2px #fff;
+            position:relative;
+            overflow:hidden;
+            white-space:nowrap;
+            border-right: .15em solid var(--accent);
+            background: linear-gradient(90deg, var(--primary) 60%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        "></h1>
+    </div>
+    <script>
+        // Efek typing dan glitch untuk animasi "TEKNOLOGI" kedua (opsional)
+        const text2 = "TEKNOLOGI";
+        const el2 = document.getElementById('tech-anim2');
+        if (el2) {
+            let i2 = 0;
+            function typeAnim2() {
+                if (i2 <= text2.length) {
+                    el2.textContent = text2.slice(0, i2);
+                    i2++;
+                    setTimeout(typeAnim2, 120);
+                } else {
+                    setTimeout(() => glitchAnim2(0), 600);
+                }
+            }
+            function glitchAnim2(count) {
+                if (count > 8) {
+                    el2.textContent = text2;
+                    el2.style.textShadow = "0 2px 12px rgba(79,140,255,0.13), 0 0 2px #fff";
+                    return;
+                }
+                let glitched = text2.split('').map((c, idx) => {
+                    if (Math.random() < 0.25) {
+                        return String.fromCharCode(65 + Math.floor(Math.random()*26));
+                    }
+                    return c;
+                }).join('');
+                el2.textContent = glitched;
+                el2.style.textShadow = count%2 ? "2px 0 #eebbc3, -2px 0 #232946" : "0 2px 12px rgba(79,140,255,0.13), 0 0 2px #fff";
+                setTimeout(() => glitchAnim2(count+1), 60);
+            }
+            typeAnim2();
+        }
+    </script>
+    -->
+
+</body>
+
+</html>
